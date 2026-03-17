@@ -1,0 +1,17 @@
+# Secrets
+*.key
+*.json.secret
+.env
+.phoebe-wallet.json
+
+# Logs
+logs/*.log
+data/*.db
+
+# Node
+node_modules/
+package-lock.json
+
+# Temp
+*.tmp
+.DS_Store
