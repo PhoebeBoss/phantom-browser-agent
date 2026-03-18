@@ -15,3 +15,6 @@ package-lock.json
 # Temp
 *.tmp
 .DS_Store
+# GitHub credentials (never commit)
+.github-credentials
+../.github-credentials

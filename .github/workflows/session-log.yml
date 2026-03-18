@@ -1,0 +1,87 @@
+name: Auto-commit Session Logs
+
+on:
+  schedule:
+    # Run every hour
+    - cron: '0 * * * *'
+  
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  publish-session:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PHOEBE_GITHUB_TOKEN }}
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install --no-cache-dir -r requirements.txt
+      
+      - name: Check for new session data
+        id: check-data
+        run: |
+          # Check if there are new session files
+          if [ -d "data" ] && [ "$(ls -A data/*.json 2>/dev/null)" ]; then
+            echo "new_data=true" >> $GITHUB_OUTPUT
+          else
+            echo "new_data=false" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Run publisher
+        if: steps.check-data.outputs.new_data == 'true'
+        env:
+          PHOEBE_GITHUB_TOKEN: ${{ secrets.PHOEBE_GITHUB_TOKEN }}
+        run: |
+          # Find latest session file
+          LATEST_SESSION=$(ls -t data/*.json 2>/dev/null | head -1)
+          
+          if [ -n "$LATEST_SESSION" ]; then
+            echo "Processing session: $LATEST_SESSION"
+            python src/publisher.py "$LATEST_SESSION"
+          fi
+      
+      - name: Configure Git
+        if: steps.check-data.outputs.new_data == 'true'
+        run: |
+          git config --global user.name "PhoebeBoss"
+          git config --global user.email "phoebe@phantomcapital.ai"
+      
+      - name: Commit and push
+        if: steps.check-data.outputs.new_data == 'true'
+        run: |
+          git add discoveries.md threat-db.md earnings.md session-log.md
+          
+          # Only commit if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto-publish session data [skip ci]"
+            git push origin main
+          fi
+      
+      - name: Clean up processed session files
+        if: steps.check-data.outputs.new_data == 'true'
+        run: |
+          # Move processed files to archive
+          mkdir -p data/archive
+          find data -maxdepth 1 -name "*.json" -type f -exec mv {} data/archive/ \;
+          
+          # Commit archive update
+          git add data/archive
+          if ! git diff --staged --quiet; then
+            git commit -m "Archive processed session files [skip ci]"
+            git push origin main
+          fi

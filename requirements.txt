@@ -1,0 +1,28 @@
+# phantom-browser-agent Python dependencies
+
+# Core
+fastapi==0.115.5
+uvicorn==0.34.0
+python-dotenv==1.0.1
+
+# Blockchain
+solders==0.21.0
+solana==0.36.0
+
+# Browser automation
+playwright==1.49.1
+
+# HTTP client
+aiohttp==3.11.11
+requests==2.32.3
+
+# Twitter
+tweepy==4.14.0
+
+# Database
+asyncpg==0.30.0
+psycopg2-binary==2.9.10
+
+# Utilities
+python-dateutil==2.9.0
+pydantic==2.10.5

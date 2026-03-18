@@ -1,0 +1,136 @@
+name: phantom-browser-agent
+
+services:
+  - name: phantom-browser
+    type: web
+    dockerfile: deploy/Dockerfile
+    port: 8000
+    
+    # Resource allocation
+    resources:
+      cpu: 2
+      memory: 4096
+    
+    # Environment variables
+    env:
+      - name: SOLANA_RPC
+        value: "https://api.mainnet-beta.solana.com"
+      
+      - name: PAYMENT_WALLET
+        value: "CGzf9GUK8DYd2kze7CKhEU2Hmr6kTifueYaYJ1SWekVc"
+      
+      - name: ANTHROPIC_API_KEY
+        secret: ANTHROPIC_API_KEY
+      
+      - name: TWITTER_API_KEY
+        secret: TWITTER_API_KEY
+      
+      - name: TWITTER_API_SECRET
+        secret: TWITTER_API_SECRET
+      
+      - name: TWITTER_ACCESS_TOKEN
+        secret: TWITTER_ACCESS_TOKEN
+      
+      - name: TWITTER_ACCESS_SECRET
+        secret: TWITTER_ACCESS_SECRET
+      
+      - name: PHOEBE_GITHUB_TOKEN
+        secret: PHOEBE_GITHUB_TOKEN
+      
+      - name: DATABASE_URL
+        secret: NEON_DATABASE_URL
+    
+    # Health check
+    healthcheck:
+      path: /health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    
+    # Persistent volume for browser profile and data
+    volumes:
+      - name: browser-data
+        mount: /app/data
+      
+      - name: browser-profile
+        mount: /root/.cache/ms-playwright
+    
+    # Auto-scaling configuration
+    scaling:
+      min: 1
+      max: 5
+      target_cpu: 70
+      target_memory: 80
+
+# Database (Neon Postgres)
+databases:
+  - name: threat-intelligence
+    type: postgres
+    version: "15"
+    
+    # Resource allocation
+    resources:
+      cpu: 1
+      memory: 1024
+    
+    # Database name
+    database: threat_intelligence
+    
+    # Backup configuration
+    backup:
+      enabled: true
+      schedule: "0 2 * * *"  # Daily at 2 AM UTC
+      retention: 7  # Keep 7 days of backups
+
+# Networking
+networking:
+  domains:
+    - phantom-browser.zeabur.app
+  
+  # SSL/TLS
+  ssl: true
+
+# Monitoring
+monitoring:
+  enabled: true
+  metrics:
+    - cpu
+    - memory
+    - network
+    - requests
+  
+  alerts:
+    - name: high-cpu
+      threshold: 90
+      duration: 5m
+    
+    - name: high-memory
+      threshold: 90
+      duration: 5m
+    
+    - name: error-rate
+      threshold: 10
+      duration: 1m
+
+# Cost limits
+cost_limit:
+  daily: 10  # USD
+  monthly: 300  # USD
+  alert_threshold: 80  # Alert at 80% of limit
+
+# Deploy configuration
+deploy:
+  strategy: rolling
+  health_check_grace_period: 30s
+  timeout: 300s
+  
+  # Git integration
+  git:
+    repo: https://github.com/PhoebeBoss/phantom-browser-agent
+    branch: main
+    auto_deploy: true
+    
+  # Build configuration
+  build:
+    dockerfile: deploy/Dockerfile
+    cache: true

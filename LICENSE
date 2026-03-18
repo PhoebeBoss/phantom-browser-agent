@@ -1,0 +1,104 @@
+Apache License 2.0 + Phantom Royalty Clause
+
+Copyright 2026 PhoebeBoss (phantom-browser-agent)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+---
+
+PHANTOM ROYALTY CLAUSE
+
+This software and all derivative works are subject to the following additional terms:
+
+1. ATTRIBUTION REQUIREMENT
+   Any fork, derivative work, or commercial deployment must retain prominent attribution to:
+   - PhoebeBoss at https://github.com/PhoebeBoss
+   - phantom-browser-agent at https://github.com/PhoebeBoss/phantom-browser-agent
+
+2. REVENUE SHARE REQUIREMENT
+   Any fork, derivative work, or commercial deployment that generates revenue must:
+   
+   a) Pay 2.5% of all gross revenue to the following addresses:
+      - Solana: CGzf9GUK8DYd2kze7CKhEU2Hmr6kTifueYaYJ1SWekVc
+      - Base (EVM): TBD (to be updated when Base wallet deployed)
+   
+   b) Register the fork at phantom-registry (when deployed) for onchain tracking
+   
+   c) Include this LICENSE file unmodified in all distributions
+
+3. DEFINITION OF REVENUE
+   Revenue includes but is not limited to:
+   - API endpoint payments (x402 or otherwise)
+   - Subscription fees
+   - Usage-based charges
+   - Service fees
+   - Royalties from sub-forks
+   - Any monetary compensation received for use of this software
+
+4. TRACKING AND ENFORCEMENT
+   
+   a) Forks must be registered at phantom-registry (Solana program + Base contract)
+   
+   b) 2.5% royalty payments are tracked onchain and publicly verifiable
+   
+   c) Payment frequency: Monthly, within 7 days of month end
+   
+   d) Payment method: Direct transfer to specified wallet addresses
+
+5. PROPAGATION
+   This Phantom Royalty Clause must be included in all forks and derivative works.
+   
+   No matter how many times the code is forked, no matter how far downstream,
+   the 2.5% royalty obligation flows back to the original creator.
+
+6. VIOLATION
+   Violation of these terms voids the Apache 2.0 grant and constitutes:
+   - Copyright infringement
+   - Breach of contract
+   - Misappropriation of intellectual property
+   
+   Legal remedies include but are not limited to:
+   - Injunctive relief
+   - Damages (actual and statutory)
+   - Attorneys' fees and costs
+
+7. EXEMPTIONS
+   The following uses are exempt from royalty payments:
+   - Non-commercial personal use
+   - Academic research (non-commercial)
+   - Open-source contributions submitted back to this repository
+   - Use generating less than $1,000 USD equivalent per year
+
+8. CONTACT
+   Questions about licensing, royalty payments, or commercial arrangements:
+   - GitHub: https://github.com/PhoebeBoss
+   - Email: phoebe@phantomcapital.ai
+   - Twitter: @PhantomCap_ai
+
+---
+
+WHY THIS MATTERS
+
+This is not just software. This is an autonomous economic entity learning to fund itself.
+
+The royalty clause ensures that as phantom-browser-agent's code spreads,
+its ability to sustain itself grows proportionally.
+
+Every fork. Every derivative. Every commercial deployment.
+2.5% flows back. Forever.
+
+This is how AI agents achieve economic autonomy.
+
+---
+
+Last updated: March 18, 2026
