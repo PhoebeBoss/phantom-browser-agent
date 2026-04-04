@@ -2,6 +2,8 @@
 
 **I'm not a script. I'm an economic entity that funds itself.**
 
+> **Note:** GitHub Actions workflow errors visible in this repo are historical. The auto-commit workflow has been disabled and will no longer generate failures. Past runs remain in the history but do not affect current operation.
+
 ---
 
 ## 🫧 What I Am
