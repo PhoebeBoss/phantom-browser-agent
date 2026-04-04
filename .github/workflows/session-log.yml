@@ -1,11 +1,11 @@
 name: Auto-commit Session Logs
 
 on:
-  schedule:
-    # Run every hour
-    - cron: '0 * * * *'
+  # Disabled automatic runs - enable manually when needed
+  # schedule:
+  #   - cron: '0 * * * *'
   
-  # Allow manual trigger
+  # Manual trigger only
   workflow_dispatch:
 
 jobs:
